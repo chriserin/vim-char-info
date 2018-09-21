@@ -1,0 +1,137 @@
+import styled from 'styled-components'
+
+export { default as theme } from './theme'
+
+# How much information can we fit into a *character*?
+
+---
+
+# A musical note has *pitch*
+
+Where the character is along the y axis (how many lines down) determines the pitch of the note
+
+---
+
+# A musical note has *timing*
+
+Where the character is along the x axis (how many columns from the left) determines the timing of the note
+
+---
+
+# A musical note has *volume*
+
+What letter the character is, a-zA-Z, will determine the volume (or _velocity_) of the note
+
+---
+
+export const Problem = styled.div`
+  color: orangered;
+  font-size: 50pt;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 22px 0 8px 0;
+  border: 4px solid red;
+`
+
+<Problem>Problem</Problem>
+
+# Can a character represent more than one note?
+
+If a column represents one beat, how do I represent eighth notes, sixteenth notes or triplets?
+
+---
+
+export const Mark = styled.span`
+  display: inline-block;
+  color: #b80c09;
+  font-size: 64pt;
+  vertical-align: text-top;
+  background: #fbfbff;
+  padding-top: 12px;
+  max-height: 52px;
+`
+
+export const CharMark = styled(Mark)`
+  margin-top: -10px;
+`
+
+export const BottomMark = styled(Mark)`
+  vertical-align: bottom;
+  padding-top: 0;
+  min-width: 49px;
+  font-size: 36pt;
+`
+
+export const Char = styled.span`
+  display: inline-block;
+  color: #b80c09;
+  font-size: 32pt;
+  vertical-align: text-top;
+  background: #fbfbff;
+  padding: 10px 12px 0;
+  max-height: 52px;
+  margin-top: -10px;
+`
+
+# Combining Characters in UTF-8
+
+Diacritical Marks such as <Mark> ̈</Mark> or <Mark> ̃</Mark> can be combined with the charater to include more information
+
+<Char>A</Char> plus <CharMark> ̈</CharMark> equals <Char>Ä</Char>
+
+or
+
+<Char>\u0041</Char> plus <Char>\u0308</Char> equals <Char>\u0041\u0308</Char>
+
+---
+
+# Dialectics can represent eigth note or sixteenth note patterns
+
+export const MarkList = styled.ul`
+  li {
+    margin-top: 16px;
+    text-align: left;
+  }
+`
+
+#### Eights
+
+<MarkList>
+<li><Char>ö</Char> - both notes</li>
+<li><Char>ȯ</Char> - first note</li>
+<li><Char>o͘</Char> - second note</li>
+</MarkList>
+
+#### Sixteenths
+
+<MarkList>
+<li><Char>ȍ̋</Char> - all four notes</li>
+<li><Char>ȍ</Char> - first two notes</li>
+<li><Char>ő</Char> - last two notes</li>
+<li><Char>ò</Char> - first note</li>
+<li><Char>ó</Char> - last note</li>
+<li><Char>o̎</Char> - middle two notes</li>
+<li><Char>o͆</Char> - first and last notes</li>
+</MarkList>
+
+---
+
+# What else?
+
+A dialectic could represent pitches for those rhythms
+
+<BottomMark> ̬</BottomMark> could combine to this <Char>Ä̬</Char> and be up-down-up.
+
+---
+
+# What else?
+
+A dialectic could represent articulation
+
+<BottomMark> ̻</BottomMark> could combine with this <Char>A̻</Char> to be a snappier envelope.
+
+---
+
+# DEMO
+
